@@ -1,31 +1,33 @@
+SET NAMES utf8mb4;
+
 -- Suppression des tables si elles existent déjà
 DROP TABLE IF EXISTS media;
 DROP TABLE IF EXISTS photographer;
 
 -- Table des photographes
 CREATE TABLE photographer (
-    id       INT PRIMARY KEY,
-    name     VARCHAR(255) NOT NULL,
-    city     VARCHAR(255) NOT NULL,
-    country  VARCHAR(255) NOT NULL,
-    tagline  VARCHAR(255) NOT NULL,
-    price    INT NOT NULL,
-    portrait VARCHAR(255) NOT NULL
-);
+    id         INT PRIMARY KEY,
+    name       VARCHAR(255) NOT NULL,
+    city       VARCHAR(255) NOT NULL,
+    country    VARCHAR(255) NOT NULL,
+    tagline    VARCHAR(255) NOT NULL,
+    price      INT NOT NULL,
+    portrait   VARCHAR(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Table des médias, liée à un photographe
 CREATE TABLE media (
-    id              INT AUTO_INCREMENT PRIMARY KEY,
+    id                INT AUTO_INCREMENT PRIMARY KEY,
     photographer_id INT NOT NULL,
-    title           VARCHAR(255) NOT NULL,
-    image           VARCHAR(255) DEFAULT NULL,
-    video           VARCHAR(255) DEFAULT NULL,
-    likes           INT NOT NULL DEFAULT 0,
-    date            DATE NOT NULL,
-    price           INT NOT NULL,
+    title             VARCHAR(255) NOT NULL,
+    image             VARCHAR(255) DEFAULT NULL,
+    video             VARCHAR(255) DEFAULT NULL,
+    likes             INT NOT NULL DEFAULT 0,
+    date              DATE NOT NULL,
+    price             INT NOT NULL,
     FOREIGN KEY (photographer_id) REFERENCES photographer(id)
         ON DELETE CASCADE
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Données des photographes
 INSERT INTO photographer (id, name, city, country, tagline, price, portrait) VALUES
